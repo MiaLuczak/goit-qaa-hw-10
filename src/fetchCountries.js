@@ -5,10 +5,6 @@ const fetchCountries = async name => {
   const baseURL = 'https://restcountries.com/v3.1';
   const searchName = name.toLowerCase();
 
-  // Creating object that uses searchName as 'service' (resource) part of URL
-  const searchParams = new URLSearchParams({
-    name: searchName,
-  });
   // Creating object that filter response fields, to necessary info required in task
   // Accesing fields with API data fields documentation
   const searchFilters = new URLSearchParams({
@@ -20,7 +16,7 @@ const fetchCountries = async name => {
   });
   try {
     const serverResponse = await fetch(
-      `${baseURL}/${searchParams}?${searchFilters}`,
+      `${baseURL}/name/${searchName}?${searchFilters}`,
       headers
     );
     const arrayOfCountries = serverResponse.json;
