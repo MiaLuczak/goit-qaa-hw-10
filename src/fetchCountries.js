@@ -13,3 +13,5 @@ const fetchCountries = async name => {
   const arrayOfCountries = serverResponse.json;
   return arrayOfCountries;
 };
+
+export { fetchCountries };
