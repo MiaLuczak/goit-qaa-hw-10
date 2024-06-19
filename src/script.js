@@ -33,7 +33,7 @@ async function searchHandler() {
       // Condition that execute function, that shows general and additional information about one country
       loader.style.display = 'none';
       result.replaceChildren();
-      elementAddFullInfo(arrayOfResults, result);
+      await elementAddFullInfo(arrayOfResults, result);
     } else if (
       (await arrayOfResults.length) <= 10 &&
       (await arrayOfResults.length) >= 2
@@ -41,7 +41,7 @@ async function searchHandler() {
       // Condition that execute function, that displays list of countries that meet query
       loader.style.display = 'none';
       result.replaceChildren();
-      elementAddBasicInfo(arrayOfResults, result);
+      await elementAddBasicInfo(arrayOfResults, result);
     } else if ((await arrayOfResults.length) > 10) {
       // Condition that displays informacion if the response have more than 10 countires
       loader.style.display = 'none';
