@@ -1,6 +1,6 @@
 async function elementAddFullInfo(from, target) {
   // Setting an async variable
-  arrayOfResults = await from;
+  let arrayOfResults = await from;
 
   // Loop that iterates on every country (object) that is in response
   arrayOfResults.forEach(async country => {
@@ -9,7 +9,7 @@ async function elementAddFullInfo(from, target) {
       const name = country.name.common;
 
       // Loop that iterates on every object property and creates an array, that later is used with .toString() method to create HTML element
-      const capitals = country.capital.toString();
+      const capitals = country.capital;
       let capitalsArray = [];
       for (const capital in capitals) {
         capitalsArray.push(capitals[capital]);
