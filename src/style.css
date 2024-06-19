@@ -43,16 +43,18 @@ body {
 }
 
 #search-result > li {
-  display: f;
+  display: flex;
   flex-direction: column;
+  margin: 3px;
 }
 
 .country-general {
   display: grid;
-  grid-template-columns: minmax(min-content, 4vw) auto;
+  grid-template-columns: minmax(min-content, 98px) auto;
   flex-direction: row;
   align-self: auto;
   justify-content: start;
+  grid-gap: 5px;
 }
 
 .country-flag {
@@ -65,7 +67,7 @@ body {
 
 .country-name {
   font-weight: bold;
-  font-size: clamp(1.5rem, 3vw, 2.75rem);
+  font-size: clamp(2.4rem, 3vw, 2.75rem);
   align-self: center;
   padding-left: 1vw;
 }
@@ -80,7 +82,7 @@ body {
 
 .country-details > div {
   display: grid;
-  grid-template-columns: 10vw auto;
+  grid-template-columns: minmax(140px, 10vw) auto;
   justify-content: start;
 }
 .country-details-category {
@@ -88,7 +90,8 @@ body {
   margin: 0.25vw;
   grid-column: 1;
   font-weight: bold;
-  font-size: 1.5vw;
+  font-size: clamp(1.5rem, 1.5vw, 2rem);
+  align-content: center;
 }
 
 .country-datails-value {
@@ -96,5 +99,5 @@ body {
   margin: 0.25vw;
   grid-column: 2;
   align-content: center;
-  font-size: 1.5vw;
+  font-size: clamp(1.5rem, 1.5vw, 2rem);
 }
