@@ -23,11 +23,14 @@ async function searchHandler() {
   if (searchQuery.length != 0 && searchQuery != lastSearchQuery) {
     lastSearchQuery = searchQuery;
     arrayOfResults = await fetchCountries(searchQuery);
+    // Conditions that select which JS script need to be executed
     if (arrayOfResults instanceof Error) {
+      // Condition that display popup information when response returns an error
       loader.style.display = 'none';
       result.replaceChildren();
       Notify.failure('Oops, there is no country with that name');
     } else if ((await arrayOfResults.length) === 1) {
+      // Condition that execute function, that shows general and additional information about one country
       loader.style.display = 'none';
       result.replaceChildren();
       elementAddFullInfo(arrayOfResults, result);
@@ -35,15 +38,18 @@ async function searchHandler() {
       (await arrayOfResults.length) <= 10 &&
       (await arrayOfResults.length) >= 2
     ) {
+      // Condition that execute function, that displays list of countries that meet query
       loader.style.display = 'none';
       result.replaceChildren();
       elementAddBasicInfo(arrayOfResults, result);
     } else if ((await arrayOfResults.length) > 10) {
+      // Condition that displays informacion if the response have more than 10 countires
       loader.style.display = 'none';
       result.replaceChildren();
       Notify.info('Too many matches found. Please enter a more specific name.');
     }
   } else {
+    // Condition that clear results list if the query is empty
     loader.style.display = 'none';
     result.replaceChildren();
     Notify.info('Please type/change your search phrase');
