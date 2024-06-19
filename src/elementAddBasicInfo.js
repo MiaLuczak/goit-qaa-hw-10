@@ -7,7 +7,7 @@ async function elementAddBasicInfo(from, target) {
       const resultLiElements = document.createElement('li');
       resultLiElements.innerHTML = `
     <div class="country-general"><img src=${flag} class="country-flag">
-    <p class="country-name">${name}</p></div>`;
+    <span class="country-name">${name}</span></div>`;
       target.appendChild(resultLiElements);
     } catch (error) {
       console.log('Cannot load info about countries');
