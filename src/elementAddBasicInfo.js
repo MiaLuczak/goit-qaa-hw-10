@@ -1,6 +1,6 @@
 async function elementAddBasicInfo(from, target) {
   // Setting an async variable
-  arrayOfResults = await from;
+  let arrayOfResults = await from;
 
   // Loop that iterates on every country (object) that is in response
   arrayOfResults.forEach(async country => {
