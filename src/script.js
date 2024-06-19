@@ -1,67 +1,55 @@
 // Importing needed modules
-import { fetchCountries } from './fetchCountries';
 import debounce from 'lodash.debounce';
-import { elementAdd } from './elementAdd';
+import { Notify } from 'notiflix';
+import { fetchCountries } from './fetchCountries';
+import { elementAddFullInfo } from './elementAddFullInfo';
+import { elementAddBasicInfo } from './elementAddBasicInfo';
 
-// Getting access to HTML Elements
+// Getting access to HTML Elements, and initializing needed global variables
 const searchField = document.querySelector('#search-box');
 const result = document.querySelector('#search-result');
-
-// Function that handles search event and variable that stores last search query
-// To prevent
+const loader = document.querySelector('.loader');
 let lastSearchQuery = '';
+
+// Function that handles search event
 async function searchHandler() {
-  // Using regular expression n{X,} to replace all whitespaces that are doubled or more
+  loader.style.display = 'block';
+  let arrayOfResults = [];
+
+  // Using regular expression n{X,} to replace all whitespaces that are doubled or more, triming trailing and starting whitespaces
   const searchQuery = searchField.value.replaceAll(/ {2,}/g, ' ').trim();
+
   // Condition that reduces API requests
-  if (true) {
-    //(searchQuery.length != 0 && searchQuery != lastSearchQuery) {
+  if (searchQuery.length != 0 && searchQuery != lastSearchQuery) {
     lastSearchQuery = searchQuery;
-    arrayOfResults = await localJSON; //fetchCountries(searchQuery); // CHANGE TO LOCAL JSON (temp avoiding api)
-    elementAdd(arrayOfResults, result);
+    arrayOfResults = await fetchCountries(searchQuery);
+    if (arrayOfResults instanceof Error) {
+      loader.style.display = 'none';
+      result.replaceChildren();
+      Notify.failure('Oops, there is no country with that name');
+    } else if ((await arrayOfResults.length) === 1) {
+      loader.style.display = 'none';
+      result.replaceChildren();
+      elementAddFullInfo(arrayOfResults, result);
+    } else if (
+      (await arrayOfResults.length) <= 10 &&
+      (await arrayOfResults.length) >= 2
+    ) {
+      loader.style.display = 'none';
+      result.replaceChildren();
+      elementAddBasicInfo(arrayOfResults, result);
+    } else if ((await arrayOfResults.length) > 10) {
+      loader.style.display = 'none';
+      result.replaceChildren();
+      Notify.info('Too many matches found. Please enter a more specific name.');
+    }
+  } else {
+    loader.style.display = 'none';
+    result.replaceChildren();
+    Notify.info('Please type/change your search phrase');
   }
 }
 
 // Adding eventListener (searchHandler) function with debounce
+loader.style.display = 'none';
 searchField.addEventListener('input', debounce(searchHandler, 300));
-
-const localJSON = [
-  // CHANGE TO LOCAL JSON (temp avoiding api)
-  {
-    flags: {
-      png: 'https://flagcdn.com/w320/ch.png',
-      svg: 'https://flagcdn.com/ch.svg',
-      alt: 'The flag of Switzerland is square shaped. It features a white Swiss cross centered on a red field.',
-    },
-    name: {
-      common: 'Switzerland',
-      official: 'Swiss Confederation',
-      nativeName: {
-        fra: {
-          official: 'Confédération suisse',
-          common: 'Suisse',
-        },
-        gsw: {
-          official: 'Schweizerische Eidgenossenschaft',
-          common: 'Schweiz',
-        },
-        ita: {
-          official: 'Confederazione Svizzera',
-          common: 'Svizzera',
-        },
-        roh: {
-          official: 'Confederaziun svizra',
-          common: 'Svizra',
-        },
-      },
-    },
-    capital: ['Bern'],
-    languages: {
-      fra: 'French',
-      gsw: 'Swiss German',
-      ita: 'Italian',
-      roh: 'Romansh',
-    },
-    population: 8654622,
-  },
-];
