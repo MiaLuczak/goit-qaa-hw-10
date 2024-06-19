@@ -15,16 +15,15 @@ const fetchCountries = async name => {
     Accept: 'application/json',
   });
 
-  try {
-    const response = await fetch(
-      `${baseURL}/name/${searchName}?${searchFilters}`,
-      headers
-    );
-    const countries = await response.json();
-    return countries;
-  } catch (err) {
-    return console.log(`Error: ${err.message}`);
-  }
+  const response = await fetch(
+    `${baseURL}/name/${searchName}?${searchFilters}`,
+    headers
+  );
+  if (!(await response.ok)) {
+    return new Error(response.status);
+  } 
+  const countries = await response.json();
+  return countries;
 };
 
 export { fetchCountries };
