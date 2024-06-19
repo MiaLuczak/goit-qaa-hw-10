@@ -1,99 +1,61 @@
-# Parcel template
+# <p align="center">GoIT - HW 10 - JS</p>
 
-Этот проект был создан при помощи Parcel. Для знакомства и настройки
-дополнительных возможностей [обратись к документации](https://parceljs.org/).
+## <p align="center">Main goal</p>
 
-## Подготовка нового проекта
+The main goal was to make a frontend site of a webpage that searches country
+info using their common name using API
 
-1. Убедись что на компьютере установлена LTS-версия Node.js.
-   [Скачай и установи](https://nodejs.org/en/) её если необходимо.
-2. Склонируй этот репозиторий.
-3. Измени имя папки с `parcel-project-template` на имя своего проекта.
-4. Создай новый пустой репозиторий на GitHub.
-5. Открой проект в VSCode, запусти терминал и свяжи проект с GitHub-репозиторием
-   [по инструкции](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories#changing-a-remote-repositorys-url).
-6. Установи зависимости проекта в терминале командой `npm install` .
-7. Запусти режим разработки, выполнив команду `npm start`.
-8. Перейди в браузере по адресу [http://localhost:1234](http://localhost:1234).
-   Эта страница будет автоматически перезагружаться после сохранения изменений в
-   файлах проекта.
+The page is hosted using GitHub Pages: <br>
+https://mioluczak.github.io/goit-js-hw-10/
 
-## Файлы и папки
+## <p align="center">Resources used</p>
 
-- Все паршалы файлов стилей должны лежать в папке `src/sass` и импортироваться в
-  файлы стилей страниц. Например, для `index.html` файл стилей называется
-  `index.scss`.
-- Изображения добавляй в папку `src/images`. Сборщик оптимизирует их, но только
-  при деплое продакшн версии проекта. Все это происходит в облаке, чтобы не
-  нагружать твой компьютер, так как на слабых машинах это может занять много
-  времени.
+The page was build using:
 
-## Деплой
+- restcountries API v3.1
 
-Для настройки деплоя проекта необходимо выполнить несколько дополнительных шагов
-по настройке твоего репозитория. Зайди во вкладку `Settings` и в подсекции
-`Actions` выбери выбери пункт `General`.
+  > API that provides information about countries <br> >
+  > [Link to API](https://restcountries.com/)
 
-![GitHub actions settings](./assets/actions-config-step-1.png)
+- notiflix
 
-Пролистай страницу до последней секции, в которой убедись что выбраны опции как
-на следующем изображении и нажми `Save`. Без этих настроек у сборки будет
-недостаточно прав для автоматизации процесса деплоя.
+  > npm package
 
-![GitHub actions settings](./assets/actions-config-step-2.png)
+- lodash.debounce
 
-Продакшн версия проекта будет автоматически собираться и деплоиться на GitHub
-Pages, в ветку `gh-pages`, каждый раз когда обновляется ветка `main`. Например,
-после прямого пуша или принятого пул-реквеста. Для этого необходимо в файле
-`package.json` отредактировать поле `homepage` и скрипт `build`, заменив
-`your_username` и `your_repo_name` на свои, и отправить изменения на GitHub.
+  > npm package
 
-```json
-"homepage": "https://your_username.github.io/your_repo_name/",
-"scripts": {
-  "build": "parcel build src/*.html --public-url /your_repo_name/"
-},
-```
+- parcel-project-template
+  > template repository
 
-Далее необходимо зайти в настройки GitHub-репозитория (`Settings` > `Pages`) и
-выставить раздачу продакшн версии файлов из папки `/root` ветки `gh-pages`, если
-это небыло сделано автоматически.
+## <p align="center">Files info</p>
 
-![GitHub Pages settings](./assets/repo-settings.png)
+All files with code are located in [src](./src/) folder
 
-### Статус деплоя
+- [index.html](./src/index.html)
 
-Статус деплоя крайнего коммита отображается иконкой возле его идентификатора.
+  > Main HTML page
 
-- **Желтый цвет** - выполняется сборка и деплой проекта.
-- **Зеленый цвет** - деплой завершился успешно.
-- **Красный цвет** - во время линтинга, сборки или деплоя произошла ошибка.
+- [style.css](./src/style.css)
 
-Более детальную информацию о статусе можно посмотреть кликнув по иконке, и в
-выпадающем окне перейти по ссылке `Details`.
+  > Main CSS file, that provides styling to page
 
-![Deployment status](./assets/status.png)
+- [script.js](./src/script.js)
 
-### Живая страница
+  > Main script file, it handles search function and choose result insertion to
+  > index.html file
 
-Через какое-то время, обычно пару минут, живую страницу можно будет посмотреть
-по адресу указанному в отредактированном свойстве `homepage`. Например, вот
-ссылка на живую версию для этого репозитория
-[https://goitacademy.github.io/parcel-project-template](https://goitacademy.github.io/parcel-project-template).
+- [fetchCountries.js](./src/fetchCountries.js)
 
-Если открывается пустая страница, убедись что во вкладке `Console` нет ошибок
-связанных с неправильными путями к CSS и JS файлам проекта (**404**). Скорее
-всего у тебя неправильное значение свойства `homepage` или скрипта `build` в
-файле `package.json`.
+  > It provides async function, that fetches needed informations of typed
+  > country name
 
-## Как это работает
+- [elementAddBasicInfo.js](./src/elementAddBasicInfo.js)
 
-![How it works](./assets/how-it-works.png)
+  > When there is more than one element that meets query search, this script
+  > takes only flags and common name of all found countries and inserts it into
+  > HTML
 
-1. После каждого пуша в ветку `main` GitHub-репозитория, запускается специальный
-   скрипт (GitHub Action) из файла `.github/workflows/deploy.yml`.
-2. Все файлы репозитория копируются на сервер, где проект инициализируется и
-   проходит сборку перед деплоем.
-3. Если все шаги прошли успешно, собранная продакшн версия файлов проекта
-   отправляется в ветку `gh-pages`. В противном случае, в логе выполнения
-   скрипта будет указано в чем проблема.
+- [elementAddFullInfo](./src/elementAddFullInfo.js)
+  > When there is only one country found, this script take action and insert
+  > information as: flag, name, capitals, population, languages of that country
