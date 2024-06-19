@@ -6,14 +6,20 @@ async function elementAddFullInfo(from, target) {
       const name = country.name.common;
       const capital = country.capital.toString();
       const population = country.population;
-      const languages = country.languages.toString();
+      const languages = country.languages;
+      let languagesArray = [];
+
+      for (const language in languages) {
+        languagesArray.push(languages[language]);
+      }
+
       const resultLiElements = document.createElement('li');
       resultLiElements.innerHTML = `
     <div class="country-general"><img src=${flag} class="country-flag">
-    <p class="country-name">${name}</p></div>
-    <div class="country-details"><div><p class="country-details-category">Capital:</p> <p class="country-datails-value">${capital}</p></div>
-    <div><p class="country-details-category">Population:</p> <p class="country-datails-value">${population}</p></div>
-    <div><p class="country-details-category">Languages:</p> <p class="country-datails-value">${languages}</p></div></div>`;
+    <span class="country-name">${name}</span></div>
+    <div class="country-details"><div><p class="country-details-category">Capital:</p> <span class="country-datails-value">${capital}</span></div>
+    <div><p class="country-details-category">Population:</p> <span class="country-datails-value">${population}</span></div>
+    <div><p class="country-details-category">Languages:</p> <span class="country-datails-value">${languagesArray.toString()}</span></div></div>`;
       target.appendChild(resultLiElements);
     } catch (error) {
       console.log('Cannot load info about countries');
