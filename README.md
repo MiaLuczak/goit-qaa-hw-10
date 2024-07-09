@@ -6,7 +6,7 @@ The main goal was to make a frontend site of a webpage that searches country
 info using their common name using API
 
 The page is hosted using GitHub Pages: <br>
-https://mioluczak.github.io/goit-js-hw-10/
+https://mioluczak.github.io/goit-qaa-hw-10/
 
 ## <p align="center">Resources used</p>
 
